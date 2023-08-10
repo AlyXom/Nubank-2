@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "NuBank",
+    "slug": "NuBank",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
