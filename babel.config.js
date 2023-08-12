@@ -9,7 +9,8 @@ module.exports = function (api) {
           alias: {
             '@screens': './src/screens',
             '@components': './src/components',
-            '@icons': './src/icons'
+            '@icons': './src/icons',
+            'types': './src/types'
           }
         }
       ]
