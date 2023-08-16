@@ -3,6 +3,12 @@
     "name": "NuBank",
     "slug": "NuBank",
     "version": "1.0.0",
+    "icon": "./src/icons/angle-left.png",
+    "splash": {
+      "image": "./src/icons/NubankSplashScreen.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#8f2abd"
+    },
     "assetBundlePatterns": [
       "**/*"
     ]

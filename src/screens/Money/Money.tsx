@@ -1,10 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { Header, Container } from '@styled/Scomponents'
 
 export default function Money() {
     return (
-        <View>
-            <Text>Money</Text>
-        </View>
+        <Container>
+            <Header>
+                <Text>Money</Text>
+            </Header>
+        </Container>
     )
 }
