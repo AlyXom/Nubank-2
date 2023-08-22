@@ -1,24 +1,29 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import { BoldText, IconsImage } from '@styled/Scomponents'
-import { PropsNavigation } from 'types/RootStackParamsList'
+import { BoldText, AngleRightTouch, AngleRightImg } from '@styled/Scomponents'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { RootState } from '@redux/store/store'
+import NotView from '@components/NotView/NotView'
 
-export default function Cont({money, isTrue}: {money?: string, isTrue?: boolean}) {
-    const {navigation}: PropsNavigation = useNavigation()
+export default function Cont({ money }: { money?: number }) {
+    const navigation = useNavigation()
+    const state = useSelector((state: RootState) => state.EyeState)
+    const Money = money.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
+
 
     return (
         <View>
             <View style={styles.Container}>
-                <View style={{ marginLeft: 20 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('Count')} style={{ marginLeft: 20 }}>
                     <BoldText>Conta</BoldText>
-                </View>
-                <TouchableOpacity style={{marginRight: 20}}>
-                    <Image style={{ width: 12, height: 12 }} source={require('@icons/angle-right.png')} />
                 </TouchableOpacity>
+                <AngleRightTouch onPress={() => navigation.navigate('Count')}>
+                    <AngleRightImg  source={require('@icons/angle-right.png')} />
+                </AngleRightTouch>
             </View>
             <View style={{ marginTop: 5, left: 20 }}>
-                <Text style={{ fontWeight: '600', fontSize: 19 }}>{money}</Text>
+                {state ? <Text style={{ fontWeight: '600', fontSize: 18 }}>{Money}</Text> : <NotView/>}
             </View>
         </View>
     )
@@ -29,6 +34,6 @@ const styles = StyleSheet.create({
         marginTop: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     }
 })

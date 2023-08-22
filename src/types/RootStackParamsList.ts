@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-type RootStackParamsList = {
+export type RootStackParamsList = {
     Home: undefined,
     Account: {
         name: string

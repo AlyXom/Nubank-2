@@ -12,7 +12,8 @@ module.exports = function (api) {
             '@icons': './src/icons',
             'types': './src/types',
             '@styled': './src/styledComponents',
-            '@data': './src/data'
+            '@data': './src/data',
+            '@redux': './src/redux'
           }
         }
       ]

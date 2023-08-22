@@ -1,14 +1,15 @@
 const DATA = [
     {
         name: 'Alysson',
-        amount: 'R$ 4.000,00',
-        fatura: 'R$ 0,00'
+        amount: 4000,
+        invoice: 596,
+        avatar: 'https://avatars.githubusercontent.com/u/109608998?v=4'
     },
     {
         name: 'André',
-        amount: 'R$ 256.000,00',
-        fatura: 'R$ 0,00'
+        amount: 256862,
+        invoice: 0
     }
 ]
 
-export default DATA[1]
+export default DATA[0]

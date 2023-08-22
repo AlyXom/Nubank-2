@@ -7,9 +7,9 @@ interface colors {
 
 const Colors: colors = {
     roxo: '#830ad1',
-    branco: '#f0f1f5',
+    branco: '#fff',
     fatura: '#ff3962',
-    cinza: '#73737b'
+    cinza: '#f0f1f5'
 }
 
 export default Colors
