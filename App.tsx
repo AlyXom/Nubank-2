@@ -16,11 +16,11 @@ const Stack = createNativeStackNavigator()
 const HomeTab = () => {
   return (
     <Provider store={store}>
-      <Tab.Navigator tabBar={(props) => (<TabBar {...props}/>)} screenOptions={{headerShown: false}}>
-      <Tab.Screen name="Home" component={Home} options={{tabBarIcon: "compare-arrows"}}/>
-      <Tab.Screen name="Money" component={Money} options={{tabBarIcon: "attach-money"}}/>
-      <Tab.Screen name="Store" component={Store} options={{tabBarIcon: "storefront"}}/>
-    </Tab.Navigator>
+      <Tab.Navigator tabBar={(props) => (<TabBar {...props} />)} screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="Home" component={Home} options={{ tabBarIcon: "compare-arrows" }} />
+        <Tab.Screen name="Money" component={Money} options={{ tabBarIcon: "attach-money" }} />
+        <Tab.Screen name="Store" component={Store} options={{ tabBarIcon: "storefront" }} />
+      </Tab.Navigator>
     </Provider>
   )
 }
@@ -29,12 +29,12 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Home">
-        <Stack.Screen name="HomeTab" component={HomeTab}/>
-        <Stack.Screen name="Account" component={Account}/>
-        <Stack.Screen name="Count" component={Count}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
+          <Stack.Screen name="HomeTab" component={HomeTab} />
+          <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen name="Count" component={Count} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 }

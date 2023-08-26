@@ -13,7 +13,7 @@ export const Header = styled.View`
 `;
 
 export const ProfileView = styled.View`
-    margin-top: 45px;
+    margin-top: 40px;
     height: 50px;
     justify-content: space-between;
     flex-direction: row;

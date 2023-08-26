@@ -4,7 +4,7 @@ import { BoldText, AngleRightTouch, AngleRightImg } from '@styled/Scomponents'
 import OpenInvoice from '@components/OpenInvoice/OpenInvoice'
 import ClosedInvoice from '@components/ClosedInvoice/ClosedInvoice'
 
-const currentDay = new Date().getDate() - 0
+const currentDay = new Date().getDate() - 2
 
 console.log(currentDay)
 

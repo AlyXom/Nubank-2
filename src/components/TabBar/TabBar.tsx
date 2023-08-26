@@ -47,6 +47,7 @@ export default function TabBar({ state, descriptors, navigation }: MyTabBarProps
                             onPress={onPress}
                             onLongPress={onLongPress}
                             style={{ flex: 1 }}
+                            key={options.tabBarIcon}
                         >
                             <View>
                                 <View style={[styles.tab, {backgroundColor: isFocused ? 'rgba(143, 42, 189, 0.2)' : null}]}>

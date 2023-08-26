@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, Text, View } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
 import { Header, Container, ProfileView } from '@styled/Scomponents'
 import Colors from 'types/colors'
 import HeaderIcons from '@components/HeaderIcons/HeaderIcons'
@@ -22,6 +23,7 @@ export default function Home() {
 
     return (
         <Container showsVerticalScrollIndicator={false}>
+            <StatusBar style='auto'/>
             <Header>
                 <ProfileView>
                     <Image style={{ width: 50, height: 50, borderRadius: 50, marginLeft: 15 }} source={{ uri: Data.avatar }} />

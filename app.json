@@ -3,14 +3,25 @@
     "name": "NuBank",
     "slug": "NuBank",
     "version": "1.0.0",
-    "icon": "./src/icons/angle-left.png",
+    "icon": "./src/icons/logonubank.png",
     "splash": {
-      "image": "./src/icons/NubankSplashScreen.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#8f2abd"
+      "image": "./src/icons/splashscreen_image.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#830AD1"
     },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/icons/logonubank.png",
+        "backgroundColor": "#830AD1"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8a3d76a6-f46a-486f-973f-02ddadf66c69"
+      }
+    }
   }
 }
