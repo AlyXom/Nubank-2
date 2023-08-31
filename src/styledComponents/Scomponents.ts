@@ -110,3 +110,37 @@ export const InvoiceValue = styled.Text`
     font-size: 19px;
     font-weight: 600;
 `
+
+export const ProfileImage = styled.Image`
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-left: 15px;
+`
+
+export const BoxesImage = styled.Image`
+    width: 45px;
+    height: 45px;
+`
+
+export const BoxesView = styled.TouchableOpacity`
+    background-color: rgba(136, 194, 242, 0.5);
+    height: 110px;
+    width: 110px;
+    align-items: center;
+    margin-left: 15px;
+    border-radius: 10px;
+    justify-content: center;
+`
+
+export const ModalView = styled.View`
+    flex: 1;
+    background-color: ${Colors.cinza};
+`
+
+export const ModalContainer = styled.View`
+    margin-left: 30px;
+    margin-top: 30px;
+    background-color: ${Colors.cinza};
+    width: 300px;
+`

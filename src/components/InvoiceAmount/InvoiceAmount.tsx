@@ -6,8 +6,6 @@ import ClosedInvoice from '@components/ClosedInvoice/ClosedInvoice'
 
 const currentDay = new Date().getDate() - 2
 
-console.log(currentDay)
-
 export default function InvoiceAmount() {
     return (
         <View style={Style.container}>

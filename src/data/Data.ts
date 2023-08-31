@@ -8,8 +8,8 @@ const DATA = [
     {
         name: 'André',
         amount: 256862,
-        invoice: 0
+        invoice: 248,
     }
 ]
 
-export default DATA[0]
+export default DATA[1]

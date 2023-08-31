@@ -5,7 +5,11 @@ export declare global {
             Account: {
                 name: string
             },
-            Count: undefined
+            Count: undefined,
+            Config: undefined,
+            Box: undefined,
+            Investment: undefined,
+            Cripto: undefined
         }
     }
 }

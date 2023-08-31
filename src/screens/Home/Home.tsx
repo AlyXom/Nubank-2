@@ -1,8 +1,7 @@
 import React from 'react'
-import { Image, Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { Header, Container, ProfileView } from '@styled/Scomponents'
-import Colors from 'types/colors'
+import { Header, Container, ProfileView, ProfileImage } from '@styled/Scomponents'
 import HeaderIcons from '@components/HeaderIcons/HeaderIcons'
 import Cont from '@components/Cont/Cont'
 import ItensRoll from '@components/ItensRoll/ItensRoll'
@@ -12,21 +11,32 @@ import InfosCard from '@components/Infoscard/InfosCard'
 import InvoiceAmount from '@components/InvoiceAmount/InvoiceAmount'
 import { LineView } from '@styled/Scomponents'
 import BankLoan from '@components/BankLoan/BankLoan'
+import { useNavigation } from '@react-navigation/native'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '@redux/store/store'
+import { setIsTrueOrFalse } from '@redux/reducers/ModalVisible'
+import Config from '@screens/ConfigScreen/Config'
 
+export const ProfilePhoto = require('../../userPhoto/foto.jpeg')
 
 const { name, amount } = Data
 
-const image = 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600'
-
+const MyImage: number = require('@icons/credit-card.png')
 
 export default function Home() {
 
+    const { navigate } = useNavigation()
+    const state = useSelector((state: RootState) => state.ModalVisible)
+    const dispatch = useDispatch()
+
     return (
         <Container showsVerticalScrollIndicator={false}>
-            <StatusBar style='auto'/>
+            <StatusBar style='auto' />
             <Header>
                 <ProfileView>
-                    <Image style={{ width: 50, height: 50, borderRadius: 50, marginLeft: 15 }} source={{ uri: Data.avatar }} />
+                    <TouchableOpacity onPress={() => dispatch(setIsTrueOrFalse(!state))}>
+                        <ProfileImage source={ProfilePhoto} />
+                    </TouchableOpacity>
                     <HeaderIcons />
                 </ProfileView>
                 <View style={{ marginTop: 25, marginBottom: 24 }}>
@@ -35,13 +45,15 @@ export default function Home() {
             </Header>
             <Cont money={amount} />
             <ItensRoll />
-            <MyCards />
+            <MyCards title='Meus cartões' Img={MyImage} />
             <InfosCard />
             <LineView></LineView>
             <InvoiceAmount />
             <LineView></LineView>
             <BankLoan />
             <LineView></LineView>
+            <View style={{ marginTop: 85 }}></View>
+            <Config />
         </Container>
     )
 }

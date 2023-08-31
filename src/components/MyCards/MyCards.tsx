@@ -1,13 +1,13 @@
 import React from 'react'
-import { TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { TouchableOpacity, Image, StyleSheet, ImageSourcePropType } from 'react-native'
 import { BoldText } from '@styled/Scomponents'
 import Colors from 'types/colors'
 
-export default function MyCards() {
+export default function MyCards({Img, title}: {Img: number, title: string}) {
     return (
         <TouchableOpacity style={styles.container}>
-            <Image style={{width: 20, height: 20, marginLeft: 10}} source={require('@icons/credit-card.png')}/>
-            <BoldText style={{marginLeft: 10, fontSize: 16}}>Meus cartões</BoldText>
+            <Image style={{width: 25, height: 25, marginLeft: 10}} source={Img}/>
+            <BoldText style={{marginLeft: 10, fontSize: 16}}>{title}</BoldText>
         </TouchableOpacity>
     )
 }

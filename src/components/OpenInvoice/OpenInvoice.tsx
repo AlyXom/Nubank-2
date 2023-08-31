@@ -6,6 +6,7 @@ import Colors from 'types/colors'
 import { useSelector } from 'react-redux'
 import { RootState } from '@redux/store/store'
 import NotView from '@components/NotView/NotView'
+import MiniNotView from '@components/MiniNotView/MiniNotView'
 
 const { name, amount, invoice, avatar } = Data
 
@@ -23,8 +24,8 @@ export default function OpenInvoice() {
             <InvoiceAmount>
                 {state ? <InvoiceValue>{Invoice}</InvoiceValue> : <NotView />}
             </InvoiceAmount>
-            <Text style={{ marginTop: 10 }}>Limite disponível: R$ 200,00</Text>
-            <Text>Limite adicional para Pix e Boletos: <Text style={{ color: Colors.roxo }}>R$: 450,00</Text></Text>
+            <Text style={{ marginTop: 10 }}>Limite disponível: {state ? <Text>R$ 200,00</Text> : <MiniNotView /> }</Text>
+            <Text>Limite adicional para Pix e Boletos: {state ? <Text style={{ color: Colors.roxo }}>R$: 450,00</Text> : <MiniNotView />}</Text>
         </InvoiceView>
     )
 }

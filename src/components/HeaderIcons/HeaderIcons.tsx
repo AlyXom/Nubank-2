@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import { TouchableOpacity, View, StyleSheet } from 'react-native'
 import { IconsImage } from '@styled/Scomponents'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setIsTrueOrFalse } from '@redux/reducers/stateReducer'
+import { RootState } from '@redux/store/store'
 
 const openEye = require('@icons/eye_open.png')
 const closeEye = require('@icons/eye_close.png')
 
 export default function HeaderIcons() {
-    const dispatch = useDispatch()
-    const [isEyeOpen, setEye] = useState(true)
 
+    const state = useSelector((state: RootState) => state.EyeState)
+    const dispatch = useDispatch()
     return (
         <View style={styles.IconsContainer}>
             <TouchableOpacity onPress={ async () => {
-                await setEye(!isEyeOpen)
-                await dispatch(setIsTrueOrFalse(!isEyeOpen))
+                await dispatch(setIsTrueOrFalse(!state))
             }}>
-                <IconsImage style={styles.colorIcon} source={isEyeOpen ? openEye : closeEye} />
+                <IconsImage style={styles.colorIcon} source={ state ? openEye : closeEye} />
             </TouchableOpacity>
             <TouchableOpacity>
                 <IconsImage style={styles.colorIcon} source={require('@icons/help.png')} />

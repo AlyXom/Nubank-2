@@ -5,7 +5,11 @@ export type RootStackParamsList = {
     Account: {
         name: string
     },
-    Count: undefined
+    Count: undefined,
+    Config: undefined,
+    Box: undefined,
+    Investment: undefined,
+    Cripto: undefined
 }
 
 export type PropsNavigation = NativeStackScreenProps<RootStackParamsList>

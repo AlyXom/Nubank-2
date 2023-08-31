@@ -9,6 +9,7 @@ import Account from "@screens/Account/Account";
 import TabBar from "@components/TabBar/TabBar";
 import Money from "@screens/Money/Money";
 import Store from "@screens/Store/Store";
+import Config from "@screens/ConfigScreen/Config";
 
 const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
@@ -33,6 +34,7 @@ export default function App() {
           <Stack.Screen name="HomeTab" component={HomeTab} />
           <Stack.Screen name="Account" component={Account} />
           <Stack.Screen name="Count" component={Count} />
+          <Stack.Screen name="Config" component={Config}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
