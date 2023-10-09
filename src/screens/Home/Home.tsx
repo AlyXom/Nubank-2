@@ -17,8 +17,6 @@ import { RootState } from '@redux/store/store'
 import { setIsTrueOrFalse } from '@redux/reducers/ModalVisible'
 import Config from '@screens/ConfigScreen/Config'
 
-export const ProfilePhoto = require('../../userPhoto/foto.jpeg')
-
 const { name, amount } = Data
 
 const MyImage: number = require('@icons/credit-card.png')
@@ -35,7 +33,7 @@ export default function Home() {
             <Header>
                 <ProfileView>
                     <TouchableOpacity onPress={() => dispatch(setIsTrueOrFalse(!state))}>
-                        <ProfileImage source={ProfilePhoto} />
+                        <ProfileImage source={{uri: "https://avatars.githubusercontent.com/u/109608998?v=4"}} />
                     </TouchableOpacity>
                     <HeaderIcons />
                 </ProfileView>
