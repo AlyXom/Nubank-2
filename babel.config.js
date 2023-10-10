@@ -15,7 +15,7 @@ module.exports = function (api) {
             '@data': './src/data',
             '@redux': './src/redux',
             '@routes': './src/routes',
-            '@service': './src/service'
+            '@service': './src/service',
           }
         }
       ]

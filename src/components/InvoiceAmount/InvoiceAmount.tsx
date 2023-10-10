@@ -1,12 +1,12 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { BoldText, AngleRightTouch, AngleRightImg } from '@styled/Scomponents'
 import OpenInvoice from '@components/OpenInvoice/OpenInvoice'
 import ClosedInvoice from '@components/ClosedInvoice/ClosedInvoice'
 
 const currentDay = new Date().getDate() - 2
 
-export default function InvoiceAmount() {
+export default function InvoiceAmount({closing, paymentData}: {closing: number, paymentData: number}) {
     return (
         <View style={Style.container}>
             <View style={Style.creditView}>
@@ -18,7 +18,7 @@ export default function InvoiceAmount() {
                 </AngleRightTouch>
             </View>
             <View style={{marginTop: 15}}>
-                {currentDay >= 13 && currentDay <= 20 ? <ClosedInvoice/> : <OpenInvoice/> }
+                {currentDay >= closing && currentDay <= paymentData ? <ClosedInvoice/> : <OpenInvoice/> }
             </View>
         </View>
     )

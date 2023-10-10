@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@redux/store/store'
 import NotView from '@components/NotView/NotView'
 
-export default function Cont({ money }: { money?: number }) {
+export default function Cont({ money }: { money?: any }) {
     const navigation = useNavigation()
     const state = useSelector((state: RootState) => state.EyeState)
     const Money = money.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})

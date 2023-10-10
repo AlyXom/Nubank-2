@@ -6,15 +6,14 @@ import Colors from 'types/colors'
 import { useSelector } from 'react-redux'
 import { RootState } from '@redux/store/store'
 import NotView from '@components/NotView/NotView'
-
-const { invoice } = Data
-
-const Invoice = invoice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+import { Convert } from '@components/OpenInvoice/OpenInvoice'
 
 
 export default function ClosedInvoice() {
 
+    const { invoice_amount, payment_data } = useSelector((state: RootState) => state.Account)
     const state = useSelector((state: RootState) => state.EyeState)
+    const Invoice = Convert(invoice_amount)
 
     return (
         <InvoiceView style={{ marginLeft: 25 }}>
@@ -25,7 +24,7 @@ export default function ClosedInvoice() {
                 {state ? <InvoiceValue>{Invoice}</InvoiceValue> : <NotView />}
             </InvoiceAmount>
             <View>
-                <InvoiceText style={{ marginTop: 5 }}>Vencimento dia 20</InvoiceText>
+                <InvoiceText style={{ marginTop: 5 }}>Vencimento dia {payment_data}</InvoiceText>
                 <View style={{ flexDirection: 'row', marginTop: 20 }}>
                     <ButtonTouch>
                         <Text style={{color: 'white', fontSize: 17, fontWeight: '600', textAlign: 'center'}}>Pagar fatura</Text>
