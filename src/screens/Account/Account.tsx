@@ -7,7 +7,7 @@ export default function Account({navigation, route}: PropsNavigation){
 
     return (
         <View>
-            <Text>{route.params.name}</Text>
+            <Text>Seila</Text>
         </View>
     )
 }
