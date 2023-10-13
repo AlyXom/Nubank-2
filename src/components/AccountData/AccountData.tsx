@@ -5,11 +5,14 @@ import { api } from '@service/api'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@redux/store/store'
 import { requestMediaLibraryPermissionsAsync, launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker"
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { authUser } from '@redux/reducers/auth'
 
 
 
 export default function AccountData() {
 
+    const dispatch = useDispatch()
     const [selectedImage, setSelectedImage] = useState()
     const { user } = useSelector((state: RootState) => state.Auth)
 
@@ -41,7 +44,13 @@ export default function AccountData() {
                 </TouchableOpacity>
             </View>
             <View>
-
+                <TouchableOpacity onPress={async() => {
+                    await AsyncStorage.removeItem("@nubankapp:token")
+                    await AsyncStorage.removeItem("@nubankapp:user")
+                    dispatch(authUser({}))
+                }}>
+                    <Text>Sair</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
