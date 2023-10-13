@@ -9,7 +9,9 @@ export type RootStackParamsList = {
     Config: undefined,
     Box: undefined,
     Investment: undefined,
-    Cripto: undefined
+    Cripto: undefined,
+    signup: undefined,
+    login: undefined
 }
 
 export type PropsNavigation = NativeStackScreenProps<RootStackParamsList>

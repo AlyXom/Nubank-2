@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { api } from "@service/api";
 import { useDispatch } from "react-redux";
-import { authUser } from "@redux/reducers/auth";
+import auth, { authUser } from "@redux/reducers/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
+
+    const { navigate } = useNavigation()
 
     const dispatch = useDispatch()
 
@@ -15,14 +18,19 @@ export default function Login() {
 
 
     async function userLogin() {
-        const response = await api.post('/session', { email, password })
+        const response = await api.post('/session', {email, password})
 
-        const { user, token } = response.data
-        api.defaults.headers.common["Authorization"] = `Bearer ${token}`
-        dispatch(authUser({ user, token }))
-        AsyncStorage.setItem("@nubankapp:user", JSON.stringify(user))
-        AsyncStorage.setItem("@nubankapp:token", token)
-        setValidUser(true)
+        try {
+            const { user, token } = response.data
+            api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+            dispatch(authUser({user, token}))
+            await AsyncStorage.setItem("@nubankapp:token", token)
+            await AsyncStorage.setItem("@nubankapp:user", JSON.stringify(user))
+            setValidUser(true)
+
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {
@@ -47,8 +55,11 @@ export default function Login() {
             <Text>Tela de login</Text>
             <TextInput onChangeText={(t) => getEmail(t)} placeholder="E-mail" />
             <TextInput onChangeText={(t) => getPassword(t)} placeholder="Senha" />
-            <TouchableOpacity onPress={async () => userLogin()}>
+            <TouchableOpacity onPress={async () => await userLogin()}>
                 <Text>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{marginTop: 10}} onPress={() => navigate("signup")}>
+                <Text>Criar conta</Text>
             </TouchableOpacity>
         </View>
     )

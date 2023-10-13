@@ -9,7 +9,9 @@ export declare global {
             Config: undefined,
             Box: undefined,
             Investment: undefined,
-            Cripto: undefined
+            Cripto: undefined,
+            signup: undefined,
+            login: undefined
         }
     }
 }
