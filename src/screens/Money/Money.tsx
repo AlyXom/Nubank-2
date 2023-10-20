@@ -1,13 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { Header, Container, ProfileView, ProfileImage, BoldText, LineView } from '@styled/Scomponents'
-import Data from '@data/Data'
 import HeaderIcons from '@components/HeaderIcons/HeaderIcons'
 import { useNavigation } from '@react-navigation/native'
 import Boxes from '@components/Boxes/Boxes'
 import MyCards from '@components/MyCards/MyCards'
 import Insurance from '@components/Insurance/Insurance'
-import { ProfilePhoto } from '@screens/Home/Home'
 
 export default function Money() {
 
@@ -18,7 +16,7 @@ export default function Money() {
             <Header>
                 <ProfileView>
                     <TouchableOpacity onPress={() => navigate('Config')}>
-                        <ProfileImage source={ProfilePhoto} />
+                        <Text>sla</Text>
                     </TouchableOpacity>
                     <HeaderIcons />
                 </ProfileView>

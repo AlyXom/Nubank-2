@@ -3,8 +3,6 @@ import { useState } from "react"
 import { api } from "@service/api";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { accountState } from "@redux/reducers/accountReducer";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Signup() {
 

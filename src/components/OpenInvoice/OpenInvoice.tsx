@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { InvoiceText, InvoiceValue, InvoiceView, InvoiceAmount } from '@styled/Scomponents'
-import Data from '@data/Data'
 import Colors from 'types/colors'
 import { useSelector } from 'react-redux'
 import { RootState } from '@redux/store/store'
