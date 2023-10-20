@@ -20,6 +20,11 @@ import { api } from '@service/api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
+interface userInfos {
+    name?: string,
+    email?: string
+    avatar?: string
+}
 
 const MyImage: number = require('@icons/credit-card.png')
 
@@ -27,8 +32,12 @@ export default function Home() {
 
     const state = useSelector((state: RootState) => state.ModalVisible)
     const userInfos: UserInterface = useSelector((state: RootState) => state.Auth)
+    const accountInfos = useSelector((state: RootState) => state.Account)
     const dispatch = useDispatch()
     const [data, getData] = useState<Account>({})
+    const [cache, getCache] = useState<Account>({})
+    const [userCache, getUserCache] = useState<userInfos>({})
+    const linkImage = `${api.defaults.baseURL}/files/${userInfos.user.avatar}`
 
     useEffect(() => {
 
@@ -42,10 +51,25 @@ export default function Home() {
 
             getData(obj)
             dispatch(accountState(obj))
+            AsyncStorage.setItem("@nubankapp:userInfos", JSON.stringify(obj))
 
         }
         accounfInfos()
-    }, [])
+
+        async function Remember() {
+
+            const userInfos = await AsyncStorage.getItem("@nubankapp:user")
+            getUserCache(JSON.parse(userInfos))
+
+            const userAccountInfos = await AsyncStorage.getItem("@nubankapp:userInfos")
+            console.log(userAccountInfos)
+            getCache(JSON.parse(userAccountInfos))
+        }
+
+        Remember()
+    
+
+    }, [state])
 
     return (
         <Container showsVerticalScrollIndicator={false}>
@@ -53,12 +77,12 @@ export default function Home() {
             <Header>
                 <ProfileView>
                     <TouchableOpacity onPress={() => dispatch(setIsTrueOrFalse(!state))}>
-                        <ProfileImage source={{ uri: `${api.defaults.baseURL}/files/${userInfos.user.avatar}` }} />
+                        {userInfos.user.avatar ? <ProfileImage source={{uri: linkImage }} /> : <ProfileImage source={require("@icons/defaultProfile.jpg")}/>}
                     </TouchableOpacity>
                     <HeaderIcons />
                 </ProfileView>
                 <View style={{ marginTop: 25, marginBottom: 24 }}>
-                    <Text style={{ fontSize: 18, marginLeft: 22, color: 'white', fontWeight: '500' }}>Olá, {userInfos.user.name}</Text>
+                    <Text style={{ fontSize: 18, marginLeft: 22, color: 'white', fontWeight: '500' }}>Olá, {userInfos.user.name ?? userCache.name}</Text>
                 </View>
             </Header>
             <Cont money={data.amount ?? 0} />
@@ -66,7 +90,7 @@ export default function Home() {
             <MyCards title='Meus cartões' Img={MyImage} />
             <InfosCard />
             <LineView></LineView>
-            <InvoiceAmount closing={data.invoice_closing ?? 0} paymentData={data.payment_data ?? 0} />
+            <InvoiceAmount closing={data.invoice_closing ??  0} paymentData={data.payment_data ?? 0} />
             <LineView></LineView>
             <BankLoan />
             <LineView></LineView>

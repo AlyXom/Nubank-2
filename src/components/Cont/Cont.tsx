@@ -9,7 +9,10 @@ import NotView from '@components/NotView/NotView'
 export default function Cont({ money }: { money?: any }) {
     const navigation = useNavigation()
     const state = useSelector((state: RootState) => state.EyeState)
+    const AccountInfo = useSelector((state: RootState) => state.Account)
     const Money = money.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
+
+    console.log(AccountInfo.amount)
 
 
     return (

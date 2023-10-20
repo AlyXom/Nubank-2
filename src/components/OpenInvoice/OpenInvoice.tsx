@@ -8,7 +8,7 @@ import { RootState } from '@redux/store/store'
 import NotView from '@components/NotView/NotView'
 import MiniNotView from '@components/MiniNotView/MiniNotView'
 
-export function Convert(value: number = 0) {
+export function Convert(value: any = 0) {
     return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 }
 

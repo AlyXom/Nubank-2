@@ -37,6 +37,8 @@ export default function Login() {
         async function Remember() {
             const token = await AsyncStorage.getItem("@nubankapp:token")
             const user = await AsyncStorage.getItem("@nubankapp:user")
+            console.log(token)
+            console.log(user)
 
             if (token && user) {
                 api.defaults.headers.common["Authorization"] = `Bearer ${token}`
