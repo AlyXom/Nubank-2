@@ -135,12 +135,13 @@ export const BoxesView = styled.TouchableOpacity`
 
 export const ModalView = styled.View`
     flex: 1;
-    background-color: ${Colors.cinza};
+    background-color: ${Colors.roxo};
+    align-items: center;
 `
 
 export const ModalContainer = styled.View`
-    margin-left: 30px;
     margin-top: 30px;
-    background-color: ${Colors.cinza};
+    background-color: ${Colors.branco};
+    border-radius: 50px;
     width: 300px;
 `

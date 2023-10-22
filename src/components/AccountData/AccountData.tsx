@@ -2,19 +2,21 @@ import { BoldText } from '@styled/Scomponents'
 import React, { useEffect, useState } from 'react'
 import { View, TouchableOpacity, Text, Image, TextInput, Modal, StyleSheet } from 'react-native'
 import { api } from '@service/api'
-import { useDispatch, useSelector } from 'react-redux'
+import { ReactReduxContext, useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@redux/store/store'
 import { requestMediaLibraryPermissionsAsync, launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { authUser } from '@redux/reducers/auth'
 import { accountState } from '@redux/reducers/accountReducer'
 import { setIsTrueOrFalse } from '@redux/reducers/ModalVisible'
+import Colors from 'types/colors'
+import { setAtt } from '@redux/reducers/att'
 
 
 export default function AccountData() {
 
-    const formData = new FormData()
     const modal = useSelector((state: RootState) => state.ModalVisible)
+    const att = useSelector((state: RootState) => state.Att)
     const dispatch = useDispatch()
     const [selectedImage, setSelectedImage] = useState(true)
     const { user } = useSelector((state: RootState) => state.Auth)
@@ -25,16 +27,26 @@ export default function AccountData() {
     const [paymentData, setPaymentData] = useState<string>()
     const [invoiceClosing, setInvoiceClosing] = useState<string>()
     const [loan, setLoan] = useState<string>()
+    const [created, setIsCreated] = useState<boolean>(false)
 
     const linkImage = `${api.defaults.baseURL}/files/${user.avatar}`
 
     useEffect(() => {
         async function Permisson() {
             const { status } = await requestMediaLibraryPermissionsAsync()
-
-            console.log(status)
         }
         Permisson()
+
+        async function checkAccountExist() {
+            const response = await api.get('/account')
+
+            if(response.data == "Usuario nao encontrado") {
+                return alert("Preencha os campos e aperte em criar na primeira vez.")   
+            } else {
+                return
+            }
+        }
+        checkAccountExist()
     }, [])
 
     async function pickImage() {
@@ -76,7 +88,6 @@ export default function AccountData() {
         })
 
         try {
-            console.log(response.data)
             dispatch(accountState(response.data))
             await AsyncStorage.setItem("@nubankapp:userInfos", JSON.stringify(response.data))
         } catch (error) {
@@ -85,6 +96,31 @@ export default function AccountData() {
     }
 
     async function createAccount() {
+
+        if (amount == null || amount == "") {
+            return alert("Preencha todos os campos para criar")
+        }
+
+        if (invoiceAmount == null || invoiceAmount == "") {
+            return alert("Preencha todos os campos para criar")
+        }
+
+        if (paymentData == null || paymentData == "") {
+            return alert("Preencha todos os campos para criar")
+        }
+
+        if (invoiceClosing == null || invoiceClosing == "") {
+            return alert("Preencha todos os campos para criar")
+        }
+
+        if (creditCard == null || creditCard == "") {
+            return alert("Preencha todos os campos para criar")
+        }
+
+        if (loan == null || loan == "") {
+            return alert("Preencha todos os campos para criar")
+        }
+
         const response = await api.post('/account', {
             amount: amount !== null ? Number(amount) : 0,
             invoiceAmount: invoiceAmount !== null ? Number(invoiceAmount) : 0,
@@ -95,7 +131,8 @@ export default function AccountData() {
         })
 
         try {
-            console.log(response.data)
+            dispatch(setIsTrueOrFalse(!modal))
+            dispatch(setAtt(!att))
             dispatch(accountState(response.data))
             await AsyncStorage.setItem("@nubankapp:userInfos", JSON.stringify(response.data))
         } catch (error) {
@@ -111,35 +148,53 @@ export default function AccountData() {
                     {user.avatar ? <Image style={styles.image} source={{ uri: selectedImage ? linkImage : user.avatar }} /> : <Image style={styles.image} source={require("@icons/defaultProfile.jpg")} />}
                 </TouchableOpacity>
             </View>
-            <View>
-                <TextInput keyboardType='number-pad' onChangeText={(t) => setAmount(t)} placeholder='Saldo na conta' />
-                <TextInput keyboardType='number-pad' onChangeText={(t) => setInvoiceAmount(t)} placeholder='Fatura' />
-                <TextInput keyboardType='number-pad' onChangeText={(t) => setInvoiceClosing(t)} placeholder='Fechamento da fatura' />
-                <TextInput keyboardType='number-pad' onChangeText={(t) => setPaymentData(t)} placeholder='Vencimento da fatura' />
-                <TextInput keyboardType='number-pad' onChangeText={(t) => setCreditCard(t)} placeholder='Cartao de credito' />
-                <TextInput keyboardType='number-pad' onChangeText={(t) => setLoan(t)} placeholder='Emprestimo' />
-                <TouchableOpacity onPress={async () => {
+            <View style={{ marginTop: 20 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={styles.fontInput}>Saldo da conta: </Text>
+                    <TextInput style={styles.input} keyboardType='number-pad' onChangeText={(t) => setAmount(t)} placeholder='ex: 4500' />
+                </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={styles.fontInput}>Valor da fatura: </Text>
+                    <TextInput style={styles.input} keyboardType='number-pad' onChangeText={(t) => setInvoiceAmount(t)} placeholder='ex: 855.67' />
+                </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={styles.fontInput}>Fechamento da fatura: </Text>
+                    <TextInput style={styles.input} keyboardType='number-pad' onChangeText={(t) => setInvoiceClosing(t)} placeholder='ex: 13' />
+                </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={styles.fontInput}>Pagamento da fatura: </Text>
+                    <TextInput style={styles.input} keyboardType='number-pad' onChangeText={(t) => setPaymentData(t)} placeholder='ex: 20' />
+                </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={styles.fontInput}>Cartao de credito: </Text>
+                    <TextInput style={styles.input} keyboardType='number-pad' onChangeText={(t) => setCreditCard(t)} placeholder='ex: 3000' />
+                </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={styles.fontInput}>Emprestimo: </Text>
+                    <TextInput style={styles.input} keyboardType='number-pad' onChangeText={(t) => setLoan(t)} placeholder='ex: 10000' />
+                </View>
+                <TouchableOpacity style={styles.button} onPress={async () => {
                     await updateInfos()
                     dispatch(setIsTrueOrFalse(!modal))
+                    dispatch(setAtt(!att))
                 }}>
-                    <Text>Atualizar</Text>
+                    <Text style={{color: 'white', fontWeight: '500'}}>Atualizar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={async () => {
+                <TouchableOpacity style={styles.button} onPress={async () => {
                     await createAccount()
-                    dispatch(setIsTrueOrFalse(!modal))
                 }}>
-                    <Text>Criar</Text>
+                    <Text style={{color: 'white', fontWeight: '500'}}>Criar</Text>
                 </TouchableOpacity>
             </View>
             <View>
-                <TouchableOpacity onPress={async () => {
+                <TouchableOpacity style={{marginTop: 30, backgroundColor: `${Colors.roxo}`, marginBottom: 10, padding: 5, borderRadius: 10}} onPress={async () => {
                     await AsyncStorage.removeItem("@nubankapp:token")
                     await AsyncStorage.removeItem("@nubankapp:user")
                     await AsyncStorage.removeItem("@nubankapp:userInfos")
                     dispatch(authUser({}))
                     dispatch(accountState({}))
                 }}>
-                    <Text>Sair</Text>
+                    <Text style={{color: 'white'}}>Sair da conta</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -151,5 +206,20 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50
+    },
+    input: {
+        padding: 2
+    },
+    fontInput: {
+        fontWeight: '500'
+    },
+    button: {
+        backgroundColor: `${Colors.roxo}`,
+        marginTop: 15,
+        width: 100,
+        alignItems: 'center',
+        padding: 5,
+        borderRadius: 10,
+        alignSelf: 'center'
     }
 })

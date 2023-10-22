@@ -3,13 +3,15 @@ import setIsTrueOrFalse from '@redux/reducers/stateReducer'
 import setIsTrue from '@redux/reducers/ModalVisible'
 import authSlice from '@redux/reducers/auth'
 import accountReducer from '@redux/reducers/accountReducer'
+import att from '@redux/reducers/att'
 
 export const store = configureStore({
   reducer: {
     EyeState: setIsTrueOrFalse,
     ModalVisible: setIsTrue,
     Auth: authSlice,
-    Account: accountReducer
+    Account: accountReducer,
+    Att: att,
   },
 })
 

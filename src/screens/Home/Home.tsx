@@ -31,12 +31,14 @@ const MyImage: number = require('@icons/credit-card.png')
 export default function Home() {
 
     const state = useSelector((state: RootState) => state.ModalVisible)
+    const att = useSelector((state: RootState) => state.Att)
     const userInfos: UserInterface = useSelector((state: RootState) => state.Auth)
     const accountInfos = useSelector((state: RootState) => state.Account)
     const dispatch = useDispatch()
     const [data, getData] = useState<Account>({})
     const [cache, getCache] = useState<Account>({})
     const [userCache, getUserCache] = useState<userInfos>({})
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const linkImage = `${api.defaults.baseURL}/files/${userInfos.user.avatar}`
 
     useEffect(() => {
@@ -45,31 +47,20 @@ export default function Home() {
             const response = await api.get('/account')
             const obj = response.data
 
-            if (!obj.amount) {
-                return console.log("Invalido")
+            if (obj == "Usuario nao encontrado") {
+                dispatch(setIsTrueOrFalse(!state))
             }
 
             getData(obj)
             dispatch(accountState(obj))
+            setIsLoading(true)
             AsyncStorage.setItem("@nubankapp:userInfos", JSON.stringify(obj))
 
         }
         accounfInfos()
-
-        async function Remember() {
-
-            const userInfos = await AsyncStorage.getItem("@nubankapp:user")
-            getUserCache(JSON.parse(userInfos))
-
-            const userAccountInfos = await AsyncStorage.getItem("@nubankapp:userInfos")
-            console.log(userAccountInfos)
-            getCache(JSON.parse(userAccountInfos))
-        }
-
-        Remember()
     
 
-    }, [state])
+    }, [att])
 
     return (
         <Container showsVerticalScrollIndicator={false}>
@@ -79,6 +70,7 @@ export default function Home() {
                     <TouchableOpacity onPress={() => dispatch(setIsTrueOrFalse(!state))}>
                         {userInfos.user.avatar ? <ProfileImage source={{uri: linkImage }} /> : <ProfileImage source={require("@icons/defaultProfile.jpg")}/>}
                     </TouchableOpacity>
+                    {isLoading ? <Text></Text> : <Text style={{color: 'white'}}>Carregando...</Text>}
                     <HeaderIcons />
                 </ProfileView>
                 <View style={{ marginTop: 25, marginBottom: 24 }}>

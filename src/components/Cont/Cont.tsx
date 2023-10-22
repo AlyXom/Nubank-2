@@ -12,8 +12,6 @@ export default function Cont({ money }: { money?: any }) {
     const AccountInfo = useSelector((state: RootState) => state.Account)
     const Money = money.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
 
-    console.log(AccountInfo.amount)
-
 
     return (
         <View>

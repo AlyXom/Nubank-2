@@ -14,18 +14,18 @@ export default function Boxes() {
     return (
         <View style={{ flexDirection: 'row' }}>
             <View>
-                <BoxesView onPress={() => console.log('bomDia')}>
+                <BoxesView onPress={() => undefined}>
                     <View>
                         <BoxesImage style={{ tintColor: '#1460b8' }} source={require('@icons/cost.png')} />
                     </View>
                 </BoxesView>
                 <View style={{ marginLeft: 20 }}>
                     <Text style={{ fontWeight: '500' }}>Caixinhas</Text>
-                    {state ? <Text style={{ fontWeight: '500', fontSize: 13 }}>R$ 30,57</Text> : <MiniNotView />}
+                    {state ? <Text style={{ fontWeight: '500', fontSize: 13 }}>R$ 00,00</Text> : <MiniNotView />}
                 </View>
             </View>
             <View>
-                <BoxesView onPress={() => console.log('bomDia')}>
+                <BoxesView onPress={() => undefined}>
                     <View>
                         <BoxesImage style={{ tintColor: '#1460b8', width: 30, height: 30 }} source={require('@icons/signal.png')} />
                     </View>
@@ -36,14 +36,14 @@ export default function Boxes() {
                 </View>
             </View>
             <View>
-                <BoxesView onPress={() => console.log('bomDia')}>
+                <BoxesView onPress={() => undefined}>
                     <View>
                         <BoxesImage style={{ tintColor: '#1460b8', width: 35, height: 35 }} source={require('@icons/cripto.png')} />
                     </View>
                 </BoxesView>
                 <View style={{ marginLeft: 20 }}>
                     <Text style={{ fontWeight: '500' }}>Cripto</Text>
-                    {state ? <Text style={{ fontWeight: '500', fontSize: 13 }}>R$ 10,68</Text> : <MiniNotView />}
+                    {state ? <Text style={{ fontWeight: '500', fontSize: 13 }}>R$ 00,00</Text> : <MiniNotView />}
                 </View>
             </View>
         </View>
